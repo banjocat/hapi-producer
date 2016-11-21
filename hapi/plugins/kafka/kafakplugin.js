@@ -18,26 +18,26 @@ var producer = (server, options, next) => {
 
     const success = {"message": "success"};
 
+
+    // Writes a json request to kafka
+    function write_to_kafka(request, reply) {
+        if (producer.ready === false) {console.log('Not ready!');}
+        else {
+            var message = {
+                topic: 'json',
+                messages: request.payload
+            };
+            producer.send([message], (err, data) => {
+                if (err) {console.log(err);}
+                reply(success);
+            });
+        }
+    }
+
     server.route({
         method: 'POST',
         path: '/kafka',
-        handler: (request, reply) => {
-            if (producer.ready) {
-                var message = {
-                    topic: 'json',
-                    messages: request.payload,
-                };
-                producer.send([message], (err, data) => {
-                    if (err) {
-                        console.log('error');
-                    }
-                });
-            }
-            else {
-                console.log('Producer is not ready');
-            }
-            reply(success);
-        }
+        handler: write_to_kafka
     });
     next();
 };
