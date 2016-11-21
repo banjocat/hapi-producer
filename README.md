@@ -5,10 +5,6 @@ and also learn general nodejs api connections to popular databases.
 
 A client was using hapi and this is a playground for me to learn it better.
 
-## Benchmarks in requests/sec (timeouts)
-
-Of course there are a lot more timeouts when working with sync code.
-
 ## Goals
 * Use hapi
 * Use docker
