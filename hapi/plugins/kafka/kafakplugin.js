@@ -17,19 +17,32 @@ var producer = (server, options, next) => {
     });
 
     const success = {"message": "success"};
+    const failure = {"message": "failure"};
+
+    // Creates the message to send to kafka
+    function createMessage(request) {
+        var message = {
+            topic: 'json',
+            messages: request.payload
+        };
+        return message;
+    }
 
 
     // Writes a json request to kafka
-    function write_to_kafka(request, reply) {
-        if (producer.ready === false) {console.log('Not ready!');}
+    function writeToKafka(request, reply) {
+        if (producer.ready === false) {
+            console.log('Not ready!');
+        }
         else {
-            var message = {
-                topic: 'json',
-                messages: request.payload
-            };
+            var message = createMessage(request);
             producer.send([message], (err, data) => {
-                if (err) {console.log(err);}
-                reply(success);
+                if (err) {
+                    reply(failure);
+                }
+                else {
+                    reply(success);
+                }
             });
         }
     }
@@ -37,7 +50,7 @@ var producer = (server, options, next) => {
     server.route({
         method: 'POST',
         path: '/kafka',
-        handler: write_to_kafka
+        handler: writeToKafka
     });
     next();
 };
