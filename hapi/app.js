@@ -34,7 +34,12 @@ server.route({
     }
 });
 
-server.register([require('./plugins/helloplugin.js'), {
+server.register([{
+    register: require('./plugins/kafka/kafakplugin.js'),
+    options: {
+        zookeeper: 'zookeeper:2181'
+    }},
+    require('./plugins/helloplugin.js'), {
     register: Good,
     options: {
         reporters: {

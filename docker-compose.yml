@@ -4,3 +4,22 @@ services:
         build: ./hapi/.
         ports:
             - "3000:3000"
+        depends_on:
+            - kafka
+            - zookeeper
+        volumes:
+            - './hapi/.:/app/.'
+    zookeeper:
+        image: wurstmeister/zookeeper
+    kafka:
+        image: wurstmeister/kafka
+        environment:
+            KAFKA_ADVERTISED_HOST_NAME: kafka
+            KAFKA_ADVERTISED_PORT: 9092
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+        depends_on:
+            - zookeeper
+        ports:
+            - 9092
+
+            
