@@ -34,7 +34,7 @@ server.route({
     }
 });
 
-server.register([require('./helloplugin.js'), {
+server.register([require('./plugins/helloplugin.js'), {
     register: Good,
     options: {
         reporters: {

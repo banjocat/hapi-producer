@@ -6,8 +6,8 @@ and also learn general nodejs api connections to popular databases.
 A client was using hapi and this is a playground for me to learn it better.
 
 ## Goals
-* Use hapi
-* Use docker
+* ~~Use hapi~~
+* ~~Use docker~~
 * JSON to cassandra
 * JSON to kafka
 * JSON to postgresql
