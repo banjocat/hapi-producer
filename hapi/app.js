@@ -8,17 +8,23 @@ const server = new Hapi.Server();
 server.connection({port: 3000});
 
 
-server.register([{
-    register: require('./plugins/kafka/kafakplugin.js'),
-    options: {
-        zookeeper: 'zookeeper:2181'
-    }},
-    require('./plugins/helloplugin.js'),
+server.register([
+        {
+            register: require('./plugins/kafka/kafakplugin.js'),
+            path: '/kafka',
+            options: {
+                zookeeper: 'zookeeper:2181'
+            }
+        },
+        {
+            register: require('./plugins/helloplugin.js'),
+            path: '/'
+        }
 ], (err) => {
-    if (err) {
-        throw err;
-    }
-});
+            if (err) {
+                throw err;
+            }
+        });
 
 server.start((err) => {
 
