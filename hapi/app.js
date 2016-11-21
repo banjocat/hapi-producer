@@ -39,23 +39,8 @@ server.register([{
     options: {
         zookeeper: 'zookeeper:2181'
     }},
-    require('./plugins/helloplugin.js'), {
-    register: Good,
-    options: {
-        reporters: {
-            console: [{
-                module: 'good-squeeze',
-                name: 'Squeeze',
-                args: [{
-                    response: '*',
-                    log: '*'
-                }]
-                }, {
-                    module: 'good-console'
-                }, 'stdout']
-        }
-    }
-}], (err) => {
+    require('./plugins/helloplugin.js'),
+], (err) => {
     if (err) {
         throw err;
     }

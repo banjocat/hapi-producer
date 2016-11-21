@@ -16,16 +16,12 @@ var producer = (server, options, next) => {
         console.log(error);
     });
 
-
-    console.log(producer.ready);
-
     const success = {"message": "success"};
 
     server.route({
         method: 'POST',
         path: '/kafka',
         handler: (request, reply) => {
-
             if (producer.ready) {
                 var message = {
                     topic: 'json',
@@ -34,9 +30,6 @@ var producer = (server, options, next) => {
                 producer.send([message], (err, data) => {
                     if (err) {
                         console.log('error');
-                    }
-                    else {
-                        console.log('done');
                     }
                 });
             }
