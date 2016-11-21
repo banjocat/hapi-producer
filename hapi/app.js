@@ -7,32 +7,6 @@ const Good = require('good');
 const server = new Hapi.Server();
 server.connection({port: 3000});
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request, reply) => {
-        const msg = server.methods.hello();
-        reply(msg);
-    }
-});
-
-server.route({
-    method: 'GET',
-    path: '/bye',
-    handler: (request, reply) => {
-        const msg = server.methods.goodbye();
-        reply(msg);
-    }
-});
-
-
-server.route({
-    method: 'GET',
-    path: '/{name}',
-    handler: (request, reply) => {
-        reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
-    }
-});
 
 server.register([{
     register: require('./plugins/kafka/kafakplugin.js'),

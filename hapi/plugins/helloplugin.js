@@ -3,12 +3,13 @@
 
 const helloplugin = {
     register: (server, option, next) => {
-        server.method('hello', () => {
-            return "hello cassie";
-        }, {});
-        server.method('goodbye', () => {
-            return "goodbye cassie";
-        }, {});
+        server.route({
+            method: 'GET',
+            path: '/',
+            handler: (request, reply) => {
+                reply('Hello Cassie');
+            }
+        });
         next();
     }
 };
