@@ -20,11 +20,12 @@ server.register([
             register: require('./plugins/helloplugin.js'),
             path: '/'
         }
-], (err) => {
-            if (err) {
-                throw err;
-            }
-        });
+],
+(err) => {
+    if (err) {
+        throw err;
+    }
+});
 
 server.start((err) => {
 
