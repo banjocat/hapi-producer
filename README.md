@@ -9,7 +9,7 @@ A client was using hapi and this is a playground for me to learn it better.
 * ~~Use hapi~~
 * ~~Use docker~~
 * JSON to cassandra
-* JSON to kafka
+* ~~JSON to kafka~~
 * JSON to postgresql
 * JSON to mongodb
 * JSON to couchdb
