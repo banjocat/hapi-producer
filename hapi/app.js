@@ -12,7 +12,11 @@ const plugins = [
     register: require('./plugins/kafka/kafakplugin.js'),
     path: '/kafka',
     options: {
-        zookeeper: 'zookeeper:2181'
+        zookeeper: 'zookeeper:2181',
+        zkconfig: {
+            spinDelay: 10000,
+            retries: 1000
+        }
     }
 },
 {
@@ -26,11 +30,12 @@ server.register(plugins,
     if (err) {
         throw err;
     }
+
+    server.start((err) => {
+        if (err) {
+            throw err;
+        }
+        console.log(`Server running at: ${server.info.uri}`);
+    });
 });
 
-server.start((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log(`Server running at: ${server.info.uri}`);
-});
