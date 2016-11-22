@@ -11,6 +11,22 @@ var producer = (server, options, next) => {
 
     const success = {"message": "success"};
     const failure = {"message": "failure"};
+
+
+    producer.on('ready', () => {
+        server.route({
+            method: 'POST',
+            path: '/kafka',
+            handler: writeToKafka
+        });
+        console.log('kafka ready');
+        next();
+    });
+
+    producer.on('error', error => {
+        console.error(error);
+    });
+
     // Creates the message to send to kafka
     function createMessage(request) {
         var message = {
@@ -19,6 +35,7 @@ var producer = (server, options, next) => {
         };
         return message;
     }
+
     // Writes a json request to kafka
     function writeToKafka(request, reply) {
         if (producer.ready === false) {
@@ -36,21 +53,6 @@ var producer = (server, options, next) => {
             });
         }
     }
-    producer.on('error', error => {
-        console.log(error);
-    });
-
-    producer.on('ready', () => {
-        server.route({
-            method: 'POST',
-            path: '/kafka',
-            handler: writeToKafka
-        });
-        console.log('kafka ready');
-        next();
-    });
-
-
 
 };
 
