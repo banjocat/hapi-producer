@@ -4,7 +4,7 @@ var kafka = require('kafka-node');
 
 
 var producer = (server, options, next) => {
-    console.info('creating producer');
+    server.log(['kafka'], 'creating producer');
     var Producer = kafka.Producer;
     var client = new kafka.Client(options.zookeeper);
     var producer = new Producer(client);
@@ -19,7 +19,7 @@ var producer = (server, options, next) => {
             path: '/kafka',
             handler: writeToKafka
         });
-        console.log('kafka ready');
+        server.log(['kafka'], 'kafka ready');
         next();
     });
 
@@ -39,7 +39,7 @@ var producer = (server, options, next) => {
     // Writes a json request to kafka
     function writeToKafka(request, reply) {
         if (producer.ready === false) {
-            console.log('Not ready!');
+            server.log(['kafka'], 'Not ready!');
         }
         else {
             var message = createMessage(request);

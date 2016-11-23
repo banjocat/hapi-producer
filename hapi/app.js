@@ -2,12 +2,12 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Good = require('good');
 
 const server = new Hapi.Server();
 server.connection({port: 3000});
 
 const plugins = [
+require('./plugins/logging/logplugin.js'),
 {
     register: require('./plugins/kafka/kafakplugin.js'),
     path: '/kafka',
@@ -35,7 +35,7 @@ server.register(plugins,
         if (err) {
             throw err;
         }
-        console.log(`Server running at: ${server.info.uri}`);
+        server.log(['startup'], `Server running at: ${server.info.uri}`);
     });
 });
 

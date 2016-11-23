@@ -4,8 +4,10 @@
   "description": "hapi tutorial",
   "main": "app.js",
   "dependencies": {
+    "bunyan": "^1.8.5",
     "hapi": "^15.2.0",
-    "kafka-node": "^1.0.7"
+    "kafka-node": "^1.0.7",
+    "lodash": "^4.17.2"
   },
   "devDependencies": {},
   "scripts": {
