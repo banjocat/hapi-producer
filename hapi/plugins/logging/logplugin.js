@@ -17,27 +17,20 @@ var logging = (server, options, next) => {
 
 
     function logEvent(event, tags) {
-        if (tags.fatal) {
+        if (tags.fatal)
             log.fatal(event);
-        }
-        else if (tags.error) {
+        else if (tags.error) 
             log.error(event);
-        }
-        else if (tags.warn) {
+        else if (tags.warn)
             log.warn(event);
-        }
-        else if (tags.info) {
+        else if (tags.info)
             log.info(event);
-        }
-        else if (tags.debug) {
+        else if (tags.debug)
             log.debug(event);
-        }
-        else if (tags.trace) {
+        else if (tags.trace)
             log.trace(event);
-        }
-        else {
+        else
             log.info(event);
-        }
     }
     next();
 };
