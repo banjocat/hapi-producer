@@ -1,21 +1,13 @@
 /* jshint node: true, esversion: 6*/
 'use strict';
 var bunyan = require('bunyan');
-var _ = require('lodash');
 
 
 var logging = (server, options, next) => {
     var log = bunyan.createLogger({
-        name: 'hapi',
-        streams: [
-        {
-            level: 'info',
-            stream: process.stdout
-        }
-        ]
+        name: 'hapi-producer',
     });
 
-    var log_levels = ['fatal', 'error', 'warn', 'info', 'debug', 'trace'];
 
     server.on('log', (event, tags) => {
         if (event) {
