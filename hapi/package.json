@@ -6,7 +6,8 @@
   "dependencies": {
     "bunyan": "^1.8.5",
     "hapi": "^15.2.0",
-    "kafka-node": "^1.0.7"
+    "kafka-node": "^1.0.7",
+    "mongodb": "^2.2.12"
   },
   "devDependencies": {},
   "scripts": {
